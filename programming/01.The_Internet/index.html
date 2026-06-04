@@ -1,176 +1,2132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>How the Internet Works — Complete Visual Guide</title>
-  <!-- Tabler Icons (lightweight, clean icon set) -->
-  <link rel="stylesheet" href="https://unpkg.com/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-  <!-- main styles -->
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div class="guide">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>How the Internet Works — Complete Visual Guide</title>
+    <!-- Tabler Icons (lightweight, clean icon set) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+    <!-- main styles -->
+    <style>
+      /* styles.css - Complete visual guide to how the internet works */
+      :root {
+        --font-sans:
+          system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+          sans-serif;
+        --font-mono: "SF Mono", Menlo, Monaco, "Cascadia Code", monospace;
 
-  <h2 class="sr-only">How the Internet Works — A Complete Visual Guide</h2>
+        /* Light mode defaults (will adapt to system or can be overridden) */
+        --color-text-primary: #1a1e24;
+        --color-text-secondary: #3b4050;
+        --color-text-tertiary: #6c7283;
+        --color-background-primary: #ffffff;
+        --color-background-secondary: #f6f7f9;
+        --color-border-primary: #e2e4e9;
+        --color-border-secondary: #cbd0d9;
+        --color-border-tertiary: #eaeef2;
 
-  <!-- Hero -->
-  <div class="hero">
-    <div class="hero-tag">Technical foundations</div>
-    <h1>How the Internet Works</h1>
-    <p>From the cables under the ocean to the lock icon in your browser — a clear, complete walkthrough of the infrastructure, protocols, and security that power the web.</p>
-  </div>
+        --color-background-info: #e6f1fb;
+        --color-text-info: #185fa5;
 
-  <!-- Table of Contents (expanded for all sections) -->
-  <div class="toc">
-    <div class="toc-title">Contents</div>
-    <div class="toc-grid">
-      <div class="toc-item" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"><span class="toc-num">01</span>Physical infrastructure</div>
-      <div class="toc-item" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"><span class="toc-num">02</span>IP addresses &amp; DNS</div>
-      <div class="toc-item" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"><span class="toc-num">03</span>Packets &amp; routing</div>
-      <div class="toc-item" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"><span class="toc-num">04</span>Protocols &amp; HTTPS</div>
-      <div class="toc-item" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"><span class="toc-num">05</span>Wi-Fi &amp; last mile</div>
-      <div class="toc-item" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"><span class="toc-num">06</span>Security &amp; encryption</div>
-      <div class="toc-item" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})"><span class="toc-num">07</span>HTTP in depth</div>
-      <div class="toc-item" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})"><span class="toc-num">08</span>Domain names</div>
-      <div class="toc-item" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})"><span class="toc-num">09</span>DNS caching &amp; TTL</div>
-      <div class="toc-item" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})"><span class="toc-num">10</span>Web hosting</div>
-      <div class="toc-item" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})"><span class="toc-num">11</span>Frontend vs Backend</div>
-      <div class="toc-item" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'})"><span class="toc-num">12</span>The full journey (step‑by‑step)</div>
-      <div class="toc-item" onclick="document.getElementById('s13').scrollIntoView({behavior:'smooth'})"><span class="toc-num">13</span>CDNs</div>
-      <div class="toc-item" onclick="document.getElementById('s14').scrollIntoView({behavior:'smooth'})"><span class="toc-num">14</span>APIs</div>
-      <div class="toc-item" onclick="document.getElementById('glossary').scrollIntoView({behavior:'smooth'})"><span class="toc-num">📖</span>Glossary</div>
+        --border-radius-sm: 6px;
+        --border-radius-md: 12px;
+        --border-radius-lg: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        color: var(--color-text-primary);
+        background: var(--color-background-primary);
+        line-height: 1.5;
+        padding: 2rem 1rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .guide {
+        max-width: 720px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 0 2rem;
+      }
+
+      /* helper */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 1rem 0 1.5rem;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        margin-bottom: 2rem;
+      }
+      .hero-tag {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        margin-bottom: 0.5rem;
+      }
+      .hero h1 {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        margin-bottom: 0.75rem;
+      }
+      .hero p {
+        font-size: 15px;
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        max-width: 560px;
+      }
+
+      /* TOC */
+      .toc {
+        background: var(--color-background-secondary);
+        border-radius: var(--border-radius-lg);
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .toc-title {
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+        margin-bottom: 0.75rem;
+      }
+      .toc-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 1rem;
+      }
+      .toc-item {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        padding: 3px 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.15s;
+      }
+      .toc-item:hover {
+        color: var(--color-text-primary);
+      }
+      .toc-num {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--color-text-tertiary);
+        min-width: 20px;
+      }
+
+      /* sections */
+      .section {
+        margin-bottom: 2.75rem;
+      }
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+      }
+      .section-num {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 500;
+        flex-shrink: 0;
+      }
+      .num-blue {
+        background: var(--color-background-info);
+        color: var(--color-text-info);
+      }
+      .num-teal {
+        background: #e1f5ee;
+        color: #0f6e56;
+      }
+      .num-amber {
+        background: #faeeda;
+        color: #854f0b;
+      }
+      .num-coral {
+        background: #faece7;
+        color: #993c1d;
+      }
+      .num-purple {
+        background: #eeedfe;
+        color: #534ab7;
+      }
+      .section-title {
+        font-size: 17px;
+        font-weight: 500;
+      }
+      .section-subtitle {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-left: auto;
+      }
+
+      p.body {
+        font-size: 15px;
+        line-height: 1.75;
+        color: var(--color-text-secondary);
+        margin-bottom: 0.875rem;
+      }
+
+      /* callouts */
+      .callout {
+        border-left: 2px solid var(--color-border-secondary);
+        padding: 0.75rem 1rem;
+        margin: 1rem 0;
+        background: var(--color-background-secondary);
+        border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+      }
+      .callout-label {
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-text-tertiary);
+        margin-bottom: 0.25rem;
+      }
+      .callout p {
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+      }
+      .callout.highlight {
+        border-left-color: #1d9e75;
+        background: #e1f5ee;
+      }
+      .callout.highlight .callout-label {
+        color: #0f6e56;
+      }
+      .callout.info {
+        border-left-color: #378add;
+        background: #e6f1fb;
+      }
+      .callout.info .callout-label {
+        color: #185fa5;
+      }
+      .callout.warn {
+        border-left-color: #ba7517;
+        background: #faeeda;
+      }
+      .callout.warn .callout-label {
+        color: #854f0b;
+      }
+      .callout.danger {
+        border-left-color: #a32d2d;
+        background: #fcebeb;
+      }
+      .callout.danger .callout-label {
+        color: #791f1f;
+      }
+
+      /* cards */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        margin: 1rem 0;
+      }
+      .mini-card {
+        background: var(--color-background-primary);
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-md);
+        padding: 0.875rem 1rem;
+      }
+      .mini-card-icon {
+        font-size: 18px;
+        margin-bottom: 0.5rem;
+        color: var(--color-text-secondary);
+      }
+      .mini-card-title {
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+      .mini-card-desc {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+      }
+
+      /* step list */
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin: 1rem 0;
+      }
+      .step {
+        display: flex;
+        gap: 14px;
+        padding: 0.75rem 0;
+        position: relative;
+      }
+      .step:not(:last-child):before {
+        content: "";
+        position: absolute;
+        left: 13px;
+        top: 44px;
+        bottom: 0;
+        width: 1px;
+        background: var(--color-border-tertiary);
+      }
+      .step-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--color-background-secondary);
+        border: 0.5px solid var(--color-border-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        flex-shrink: 0;
+      }
+      .step-content {
+        flex: 1;
+        padding-top: 4px;
+      }
+      .step-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+      .step-desc {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+      }
+
+      /* tables */
+      .table-wrap {
+        overflow-x: auto;
+        margin: 1rem 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      th {
+        text-align: left;
+        padding: 8px 12px;
+        font-weight: 500;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--color-text-secondary);
+        border-bottom: 0.5px solid var(--color-border-secondary);
+      }
+      td {
+        padding: 9px 12px;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        color: var(--color-text-secondary);
+        vertical-align: top;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* badges */
+      .badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .badge-blue {
+        background: #e6f1fb;
+        color: #185fa5;
+      }
+      .badge-green {
+        background: #eaf3de;
+        color: #3b6d11;
+      }
+      .badge-amber {
+        background: #faeeda;
+        color: #854f0b;
+      }
+      .badge-red {
+        background: #fcebeb;
+        color: #791f1f;
+      }
+      .badge-teal {
+        background: #e1f5ee;
+        color: #0f6e56;
+      }
+      .badge-purple {
+        background: #eeedfe;
+        color: #534ab7;
+      }
+      .badge-gray {
+        background: var(--color-background-secondary);
+        color: var(--color-text-secondary);
+      }
+
+      /* code blocks */
+      .code-block {
+        background: var(--color-background-secondary);
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-md);
+        padding: 1rem 1.25rem;
+        margin: 1rem 0;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        line-height: 1.7;
+        overflow-x: auto;
+        white-space: pre;
+      }
+      .code-label {
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-text-tertiary);
+        margin-bottom: 0.5rem;
+      }
+
+      /* interactive demo (packets) */
+      .interactive-demo {
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        margin: 1.25rem 0;
+      }
+      .demo-bar {
+        background: var(--color-background-secondary);
+        padding: 0.625rem 1rem;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .dot-red {
+        background: #e24b4a;
+      }
+      .dot-amber {
+        background: #ef9f27;
+      }
+      .dot-green {
+        background: #639922;
+      }
+      .demo-content {
+        padding: 1rem 1.25rem;
+      }
+      .packet-demo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0.75rem 0;
+      }
+      .packet {
+        background: #e6f1fb;
+        border: 0.5px solid #b5d4f4;
+        border-radius: 4px;
+        padding: 3px 8px;
+        font-size: 11px;
+        font-family: var(--font-mono);
+        color: #185fa5;
+        transition: all 0.1s ease;
+      }
+      .packet.arrived {
+        background: #eaf3de;
+        border-color: #c0dd97;
+        color: #3b6d11;
+      }
+      button {
+        background: var(--color-background-secondary);
+        border: 0.5px solid var(--color-border-secondary);
+        border-radius: 6px;
+        padding: 4px 12px;
+        font-size: 12px;
+        font-family: var(--font-sans);
+        font-weight: 500;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        transition: 0.1s;
+      }
+      button:hover {
+        background: var(--color-border-tertiary);
+      }
+
+      /* hosting grid */
+      .hosting-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 1rem 0;
+      }
+      .hosting-card {
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-md);
+        padding: 0.875rem 1rem;
+        background: var(--color-background-primary);
+      }
+      .hosting-card-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.375rem;
+      }
+      .hosting-card h4 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+      .hosting-card p {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+      }
+
+      /* stepper (full journey) */
+      .stepper {
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        margin: 1.25rem 0;
+      }
+      .stepper-nav {
+        background: var(--color-background-secondary);
+        padding: 0.625rem 1rem;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .stepper-dots {
+        display: flex;
+        gap: 6px;
+      }
+      .sdot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--color-border-secondary);
+        transition: background 0.2s;
+      }
+      .sdot.active {
+        background: var(--color-text-secondary);
+      }
+      .stepper-panel {
+        padding: 1.25rem 1.5rem;
+        min-height: 120px;
+      }
+      .stepper-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      .stepper-desc {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+      }
+      .stepper-btns {
+        display: flex;
+        gap: 8px;
+      }
+
+      /* big summary / glossary */
+      .big-summary {
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        margin-top: 2rem;
+      }
+      .big-summary-header {
+        padding: 1rem 1.25rem;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        background: var(--color-background-secondary);
+      }
+      .big-summary-header h3 {
+        font-size: 15px;
+        font-weight: 500;
+      }
+      .big-summary-header p {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        margin-top: 0.25rem;
+      }
+      .concept-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+      .concept {
+        padding: 0.875rem 1.25rem;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        border-right: 0.5px solid var(--color-border-tertiary);
+      }
+      .concept:nth-child(2n) {
+        border-right: none;
+      }
+      .concept:nth-last-child(-n + 2) {
+        border-bottom: none;
+      }
+      .concept-term {
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+      .concept-def {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+      }
+
+      .divider {
+        height: 0.5px;
+        background: var(--color-border-tertiary);
+        margin: 2rem 0;
+      }
+
+      /* responsive */
+      @media (max-width: 580px) {
+        .guide {
+          padding: 0 0 1rem;
+        }
+        .hero h1 {
+          font-size: 26px;
+        }
+        .toc-grid {
+          grid-template-columns: 1fr;
+        }
+        .hosting-grid {
+          grid-template-columns: 1fr;
+        }
+        .concept-grid {
+          grid-template-columns: 1fr;
+        }
+        .concept {
+          border-right: none;
+        }
+        .concept:nth-last-child(-n + 2) {
+          border-bottom: 0.5px solid var(--color-border-tertiary);
+        }
+        .concept:last-child {
+          border-bottom: none;
+        }
+        .stepper-panel {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="guide">
+      <h2 class="sr-only">How the Internet Works - A Complete Visual Guide</h2>
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-tag">By mxolisi</div>
+        <h1>How the Internet Works</h1>
+        <p>
+          From the cables under the ocean to the lock icon in your browser — a
+          clear, complete walkthrough of the infrastructure, protocols, and
+          security that power the web.
+        </p>
+      </div>
+
+      <!-- Table of Contents (expanded for all sections) -->
+      <div class="toc">
+        <div class="toc-title">Contents</div>
+        <div class="toc-grid">
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s1')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">01</span>Physical infrastructure
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s2')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">02</span>IP addresses &amp; DNS
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s3')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">03</span>Packets &amp; routing
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s4')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">04</span>Protocols &amp; HTTPS
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s5')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">05</span>Wi-Fi &amp; last mile
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s6')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">06</span>Security &amp; encryption
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s7')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">07</span>HTTP in depth
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s8')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">08</span>Domain names
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s9')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">09</span>DNS caching &amp; TTL
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s10')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">10</span>Web hosting
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s11')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">11</span>Frontend vs Backend
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s12')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">12</span>The full journey (step‑by‑step)
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s13')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">13</span>CDNs
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('s14')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <span class="toc-num">14</span>APIs
+          </div>
+          <div
+            class="toc-item"
+            onclick="
+              document
+                .getElementById('glossary')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SECTION 1 ========== -->
+      <div class="section" id="s1">
+        <div class="section-header">
+          <div class="section-num num-blue">01</div>
+          <div class="section-title">Physical infrastructure</div>
+        </div>
+        <p class="body">
+          The biggest misconception about the internet is that it's an invisible
+          "cloud." In reality, the internet is the largest physical machine ever
+          built — millions of miles of cables and hundreds of millions of
+          computers.
+        </p>
+        <div class="card-grid">
+          <div class="mini-card">
+            <div class="mini-card-icon">
+              <i class="ti ti-device-laptop" aria-hidden="true"></i>
+            </div>
+            <div class="mini-card-title">Clients</div>
+            <div class="mini-card-desc">
+              Your devices — phones, laptops, TVs. They request information.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon">
+              <i class="ti ti-server" aria-hidden="true"></i>
+            </div>
+            <div class="mini-card-title">Servers</div>
+            <div class="mini-card-desc">
+              Powerful computers storing websites, apps, and data. They serve
+              information.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon">
+              <i class="ti ti-building-warehouse" aria-hidden="true"></i>
+            </div>
+            <div class="mini-card-title">Data centers</div>
+            <div class="mini-card-desc">
+              Massive warehouses of servers. This is where the "cloud"
+              physically lives.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon">
+              <i class="ti ti-wave-sine" aria-hidden="true"></i>
+            </div>
+            <div class="mini-card-title">Backbone cables</div>
+            <div class="mini-card-desc">
+              Subsea fiber-optic cables transmit data as light pulses across
+              oceans.
+            </div>
+          </div>
+        </div>
+        <div class="callout highlight">
+          <div class="callout-label">Key insight</div>
+          <p>
+            Fiber-optic cables use <strong>light</strong> to transmit data. A
+            single cable can carry hundreds of terabits per second — enough to
+            stream millions of 4K movies simultaneously.
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 2 -->
+      <div class="section" id="s2">
+        <div class="section-header">
+          <div class="section-num num-teal">02</div>
+          <div class="section-title">IP addresses &amp; DNS</div>
+        </div>
+        <p class="body">
+          If the internet is a giant postal system, every device needs an
+          address so data knows where to go.
+        </p>
+        <div class="card-grid">
+          <div class="mini-card">
+            <div class="mini-card-icon"><i class="ti ti-map-pin"></i></div>
+            <div class="mini-card-title">IP address</div>
+            <div class="mini-card-desc">
+              A unique number assigned to every device (e.g., 192.168.1.45).
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-icon"><i class="ti ti-address-book"></i></div>
+            <div class="mini-card-title">DNS</div>
+            <div class="mini-card-desc">
+              Translates human-readable names (youtube.com) into IP addresses
+              computers understand.
+            </div>
+          </div>
+        </div>
+        <div class="callout info">
+          <div class="callout-label">Analogy</div>
+          <p>
+            DNS is like the Contacts app on your phone. You tap "Mom" and your
+            phone dials her actual number — you never need to remember it
+            yourself.
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 3: Packets + interactive demo -->
+      <div class="section" id="s3">
+        <div class="section-header">
+          <div class="section-num num-blue">03</div>
+          <div class="section-title">Packets &amp; routing</div>
+        </div>
+        <p class="body">
+          When you request a 4K movie, the server doesn't send one giant file —
+          that would clog every network.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot">1</div>
+            <div class="step-content">
+              <div class="step-title">Data is split into packets</div>
+              <div class="step-desc">
+                Every file, video, or webpage is broken into small, equal-sized
+                chunks called packets. Each gets a "shipping label" with the
+                destination IP address and a sequence number.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+              <div class="step-title">Routers direct traffic</div>
+              <div class="step-desc">
+                Specialized computers at network intersections read each
+                packet's label and send it down the fastest available path.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">3</div>
+            <div class="step-content">
+              <div class="step-title">Packets are reassembled</div>
+              <div class="step-desc">
+                Your device uses the sequence numbers to reassemble the packets
+                in the correct order.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout info">
+          <div class="callout-label">Analogy</div>
+          <p>
+            Mailing a built Lego castle: you disassemble it, mail each brick in
+            a numbered envelope, and the recipient rebuilds it.
+          </p>
+        </div>
+        <div class="interactive-demo">
+          <div class="demo-bar">
+            <span class="dot dot-green"></span
+            ><span>Packet reassembly — interactive demo</span>
+          </div>
+          <div class="demo-content">
+            <p
+              style="
+                font-size: 13px;
+                color: var(--color-text-secondary);
+                margin-bottom: 0.75rem;
+              "
+            >
+              A 4K movie frame, split into 12 packets traveling different
+              routes:
+            </p>
+            <div class="packet-demo" id="pkts">
+              <div class="packet">#01 VIDEO</div>
+              <div class="packet">#02 VIDEO</div>
+              <div class="packet">#03 VIDEO</div>
+              <div class="packet">#04 VIDEO</div>
+              <div class="packet">#05 VIDEO</div>
+              <div class="packet">#06 VIDEO</div>
+              <div class="packet">#07 VIDEO</div>
+              <div class="packet">#08 VIDEO</div>
+              <div class="packet">#09 VIDEO</div>
+              <div class="packet">#10 VIDEO</div>
+              <div class="packet">#11 VIDEO</div>
+              <div class="packet">#12 VIDEO</div>
+            </div>
+            <button
+              onclick="animatePackets()"
+              style="font-size: 13px; margin-top: 0.5rem"
+            >
+              Simulate delivery →
+            </button>
+            <p
+              id="pkt-status"
+              style="
+                font-size: 12px;
+                color: var(--color-text-tertiary);
+                margin-top: 0.5rem;
+                min-height: 18px;
+              "
+            ></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: Protocols -->
+      <div class="section" id="s4">
+        <div class="section-header">
+          <div class="section-num num-teal">04</div>
+          <div class="section-title">Protocols: the rules of communication</div>
+        </div>
+        <p class="body">
+          For a Mac to talk to a Windows PC, they all need to speak the same
+          language. These standardized languages are called protocols.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Protocol</th>
+                <th>Full name</th>
+                <th>What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-blue">TCP/IP</span></td>
+                <td>Transmission Control / Internet Protocol</td>
+                <td>
+                  TCP guarantees all packets arrive and are ordered correctly.
+                  IP handles addressing and routing.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-teal">HTTP</span></td>
+                <td>Hypertext Transfer Protocol</td>
+                <td>
+                  The language for the World Wide Web — requesting and
+                  delivering web pages.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-green">HTTPS</span></td>
+                <td>HTTP Secure</td>
+                <td>
+                  HTTP + encryption. Data between you and the server is
+                  scrambled. Intercepted packets look like gibberish.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-amber">UDP</span></td>
+                <td>User Datagram Protocol</td>
+                <td>
+                  Faster than TCP but no delivery guarantee. Used for video
+                  calls, gaming, DNS queries.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout highlight">
+          <div class="callout-label">The journey of a click</div>
+          <p>
+            You type <strong>netflix.com</strong> → DNS resolves the IP → your
+            browser breaks the request into packets → packets travel through
+            your ISP and subsea cables → Netflix's server sends back the page as
+            millions of new packets → your browser reassembles and renders them.
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 5: Wi-Fi & last mile -->
+      <div class="section" id="s5">
+        <div class="section-header">
+          <div class="section-num num-amber">05</div>
+          <div class="section-title">Wi-Fi &amp; the last mile</div>
+        </div>
+        <p class="body">
+          Data travels mostly through physical cables and light pulses until it
+          reaches your home. Wi-Fi covers the final invisible gap between the
+          wall and your device.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot"><i class="ti ti-device-mobile"></i></div>
+            <div class="step-content">
+              <div class="step-title">
+                Your phone converts data to radio waves
+              </div>
+              <div class="step-desc">
+                Your device has a tiny antenna that translates digital data (1s
+                and 0s) into radio wave frequencies — 2.4 GHz or 5 GHz.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot"><i class="ti ti-router"></i></div>
+            <div class="step-content">
+              <div class="step-title">The router catches and translates</div>
+              <div class="step-desc">
+                Your Wi-Fi router receives the radio waves and translates them
+                back into digital data.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot"><i class="ti ti-plug"></i></div>
+            <div class="step-content">
+              <div class="step-title">The modem sends it into the cable</div>
+              <div class="step-desc">
+                The modem pushes that data into the physical cable (fiber,
+                coaxial, or copper), sending it toward your ISP.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout info">
+          <div class="callout-label">Analogy</div>
+          <p>
+            You're on an island and need to send a letter to the mainland. You
+            use a flashlight to blink Morse code to a lighthouse keeper (Wi-Fi).
+            The keeper writes it down and drops it into the postal system
+            (physical cables).
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 6: Security & encryption (TLS handshake deep dive) -->
+      <div class="section" id="s6">
+        <div class="section-header">
+          <div class="section-num num-coral">06</div>
+          <div class="section-title">Security, threats &amp; encryption</div>
+        </div>
+        <p class="body">
+          Because Wi-Fi uses radio waves, it broadcasts outward in every
+          direction — anyone in range can technically "hear" your data.
+        </p>
+        <div class="callout danger">
+          <div class="callout-label">Threat: Packet sniffing</div>
+          <p>
+            Hackers use specialized software to capture radio wave packets
+            floating through the air.
+          </p>
+        </div>
+        <div class="callout danger">
+          <div class="callout-label">Threat: Evil twin / MitM</div>
+          <p>
+            A hacker broadcasts a fake Wi-Fi network; every packet passes
+            through their machine first.
+          </p>
+        </div>
+        <p class="body" style="margin-top: 1rem">
+          Modern encryption makes intercepted data useless, even when it's
+          successfully captured.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Shield</th>
+                <th>How it works</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-green">WPA2 / WPA3</span></td>
+                <td>
+                  When you enter a Wi-Fi password, you enable an encryption key
+                  that scrambles your radio waves before they're broadcast.
+                </td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-green">HTTPS</span></td>
+                <td>
+                  Even on password-free public Wi-Fi, HTTPS encrypts your
+                  passwords and credit card numbers before they're put into
+                  packets. The lock icon confirms this.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section" style="margin-bottom: 0; margin-top: 1.5rem">
+          <p class="body" style="font-weight: 500; margin-bottom: 0.5rem">
+            How HTTPS scrambles your data: the TLS handshake
+          </p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-dot">A</div>
+              <div class="step-content">
+                <div class="step-title">
+                  Asymmetric encryption — the padlock system
+                </div>
+                <div class="step-desc">
+                  The server gives out a <strong>public key</strong> (can only
+                  lock data) to anyone who asks, and keeps a
+                  <strong>private key</strong> (can only unlock) secret forever.
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-dot">B</div>
+              <div class="step-content">
+                <div class="step-title">
+                  Symmetric encryption — the secret handshake
+                </div>
+                <div class="step-desc">
+                  Once a secure channel exists, both sides switch to a single
+                  shared key — much faster, needed for streaming 4K video.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>What happens</th>
+                  <th>Who</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1. Hello</td>
+                  <td>"I want to connect securely."</td>
+                  <td>Browser</td>
+                </tr>
+                <tr>
+                  <td>2. Padlock</td>
+                  <td>"Here's my public key."</td>
+                  <td>Server</td>
+                </tr>
+                <tr>
+                  <td>3. Secret</td>
+                  <td>Generates a temporary session key.</td>
+                  <td>Browser</td>
+                </tr>
+                <tr>
+                  <td>4. Lock</td>
+                  <td>
+                    Seals session key inside a box locked with the public key.
+                  </td>
+                  <td>Browser</td>
+                </tr>
+                <tr>
+                  <td>5. Delivery</td>
+                  <td>Sends the locked box (useless without private key).</td>
+                  <td>Browser</td>
+                </tr>
+                <tr>
+                  <td>6. Unlock</td>
+                  <td>Opens the box with private key, reveals session key.</td>
+                  <td>Server</td>
+                </tr>
+                <tr>
+                  <td>7. Secure</td>
+                  <td>
+                    Both sides now share the fast session key. Connection is
+                    live.
+                  </td>
+                  <td>Both</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 7: HTTP in depth -->
+      <div class="section" id="s7">
+        <div class="section-header">
+          <div class="section-num num-blue">07</div>
+          <div class="section-title">HTTP in depth</div>
+          <span class="section-subtitle">The request-response cycle</span>
+        </div>
+        <p class="body">
+          HTTP is the language browsers and servers use. Every interaction is a
+          strict ask-and-receive: the browser sends a request, the server sends
+          a response.
+        </p>
+        <div class="callout info">
+          <div class="callout-label">Analogy</div>
+          <p>
+            Ordering at a restaurant. You give the waiter your order (request),
+            and the waiter brings food from the kitchen (response).
+          </p>
+        </div>
+        <p class="body" style="font-weight: 500; margin-top: 1rem">
+          HTTP methods — the verbs of the internet
+        </p>
+        <div class="card-grid">
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-blue">GET</span>
+            </div>
+            <div class="mini-card-desc">
+              Fetches data. Visible in URL, like writing on a postcard.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-teal">POST</span>
+            </div>
+            <div class="mini-card-desc">
+              Submits data (passwords, forms) hidden in request body — like a
+              sealed envelope.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-amber">PUT/PATCH</span>
+            </div>
+            <div class="mini-card-desc">
+              Updates existing data. PUT replaces, PATCH updates partially.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-red">DELETE</span>
+            </div>
+            <div class="mini-card-desc">
+              Removes a resource from the server.
+            </div>
+          </div>
+        </div>
+        <p class="body" style="font-weight: 500">Statelessness & cookies</p>
+        <p class="body">
+          HTTP is "stateless" — the server retains zero memory of previous
+          requests. This is why <strong>cookies</strong> exist: when you log in,
+          the server gives your browser a tiny digital ID card so it recognizes
+          you.
+        </p>
+        <p class="body" style="font-weight: 500">
+          Status codes — the server's response signal
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Range</th>
+                <th>Meaning</th>
+                <th>Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-green">2xx</span></td>
+                <td>Success</td>
+                <td>200 OK</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-blue">3xx</span></td>
+                <td>Redirection</td>
+                <td>301 Moved Permanently</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-amber">4xx</span></td>
+                <td>Client error</td>
+                <td>404 Not Found, 403 Forbidden</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-red">5xx</span></td>
+                <td>Server error</td>
+                <td>500 Internal Server Error</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="code-label">Raw POST request (login form)</div>
+        <div class="code-block">
+          POST /login.html HTTP/1.1\nHost: www.example.com\nUser-Agent:
+          Mozilla/5.0\nContent-Type:
+          application/x-www-form-urlencoded\n\nusername=joesmith&password=secret123
+        </div>
+        <div class="code-label">Raw HTTP response</div>
+        <div class="code-block">
+          HTTP/1.1 200 OK\nDate: ...\nContent-Type: text/html\n\n&lt;!DOCTYPE
+          html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Welcome
+          back!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
+        </div>
+      </div>
+
+      <!-- SECTION 8: Domain names -->
+      <div class="section" id="s8">
+        <div class="section-header">
+          <div class="section-num num-purple">08</div>
+          <div class="section-title">Domain names</div>
+        </div>
+        <p class="body">
+          Domain names are human-friendly addresses that hide numerical IP
+          addresses. Computers read them <strong>right to left</strong>.
+        </p>
+        <div class="interactive-demo">
+          <div class="demo-bar">
+            <span class="dot dot-green"></span
+            ><span>Domain anatomy: blog.google.com</span>
+          </div>
+          <div class="demo-content">
+            <div style="display: flex; gap: 0; flex-wrap: wrap">
+              <div
+                style="
+                  padding: 0.5rem 0.75rem;
+                  background: #eeedfe;
+                  border-radius: 4px 0 0 4px;
+                "
+              >
+                blog
+              </div>
+              <div
+                style="padding: 0.5rem 4px; color: var(--color-text-tertiary)"
+              >
+                .
+              </div>
+              <div style="padding: 0.5rem 0.75rem; background: #e1f5ee">
+                google
+              </div>
+              <div
+                style="padding: 0.5rem 4px; color: var(--color-text-tertiary)"
+              >
+                .
+              </div>
+              <div
+                style="
+                  padding: 0.5rem 0.75rem;
+                  background: #e6f1fb;
+                  border-radius: 0 4px 4px 0;
+                "
+              >
+                com
+              </div>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                margin-top: 0.75rem;
+                flex-wrap: wrap;
+              "
+            >
+              <div style="flex: 1">
+                <div class="badge badge-teal">Subdomain</div>
+                <div style="font-size: 12px">blog — organizes sections</div>
+              </div>
+              <div style="flex: 1">
+                <div class="badge badge-green">Second-level domain</div>
+                <div style="font-size: 12px">google — brand name</div>
+              </div>
+              <div style="flex: 1">
+                <div class="badge badge-blue">Top-level domain</div>
+                <div style="font-size: 12px">.com (commercial)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot">1</div>
+            <div class="step-content">
+              <div class="step-title">DNS Recursor (ISP's librarian)</div>
+              <div class="step-desc">
+                Your computer asks your ISP's recursor to fetch the answer.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+              <div class="step-title">Root nameserver</div>
+              <div class="step-desc">
+                "I don't know, but go ask the .com servers."
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">3</div>
+            <div class="step-content">
+              <div class="step-title">TLD nameserver</div>
+              <div class="step-desc">
+                Knows who manages google.com specifically. "Go ask Google's own
+                nameservers."
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">4</div>
+            <div class="step-content">
+              <div class="step-title">Authoritative nameserver</div>
+              <div class="step-desc">
+                Returns the actual IP address: 142.250.190.46.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Who</th>
+                <th>What they control</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-blue">Registry</span></td>
+                <td>Verisign (.com), ICANN</td>
+                <td>Owns and manages the entire TLD.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-teal">Registrar</span></td>
+                <td>GoDaddy, Namecheap</td>
+                <td>Certified to sell domain access.</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-gray">You</span></td>
+                <td>Leaseholder</td>
+                <td>You lease the right to use the domain for 1+ years.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION 9: DNS caching -->
+      <div class="section" id="s9">
+        <div class="section-header">
+          <div class="section-num num-teal">09</div>
+          <div class="section-title">DNS caching &amp; TTL</div>
+        </div>
+        <p class="body">
+          Caching is a digital cheat-sheet: once your computer learns an IP, it
+          writes it down locally and skips the journey next time.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Where</th>
+                <th>Speed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-blue">1</span></td>
+                <td>Browser cache</td>
+                <td>~0ms</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-teal">2</span></td>
+                <td>OS cache</td>
+                <td>&lt;1ms</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-amber">3</span></td>
+                <td>Home router</td>
+                <td>~1ms</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-green">4</span></td>
+                <td>ISP Recursive Resolver</td>
+                <td>~10ms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout info">
+          <div class="callout-label">TTL — the expiry date</div>
+          <p>
+            Every cached record has a Time to Live (TTL) measured in seconds.
+            When the timer hits zero, the cache deletes the record.
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 10: Web hosting -->
+      <div class="section" id="s10">
+        <div class="section-header">
+          <div class="section-num num-purple">10</div>
+          <div class="section-title">Web hosting</div>
+        </div>
+        <p class="body">
+          If the domain is your website's phone number, web hosting is the
+          physical house where the website lives.
+        </p>
+        <div class="hosting-grid">
+          <div class="hosting-card">
+            <div class="hosting-card-label" style="color: #185fa5">Shared</div>
+            <h4>Apartment building</h4>
+            <p>
+              Hundreds of sites share one server. Cheapest, but traffic spikes
+              can slow neighbours.
+            </p>
+          </div>
+          <div class="hosting-card">
+            <div class="hosting-card-label" style="color: #0f6e56">VPS</div>
+            <h4>Private condo</h4>
+            <p>
+              Physically shared but digitally partitioned with guaranteed
+              resources.
+            </p>
+          </div>
+          <div class="hosting-card">
+            <div class="hosting-card-label" style="color: #854f0b">
+              Dedicated
+            </div>
+            <h4>Private mansion</h4>
+            <p>You rent an entire physical server. Maximum control.</p>
+          </div>
+          <div class="hosting-card">
+            <div class="hosting-card-label" style="color: #534ab7">Cloud</div>
+            <h4>Shape-shifting hotel</h4>
+            <p>
+              Scales automatically; pay only for what you use (AWS, GCP, Azure).
+            </p>
+          </div>
+        </div>
+        <div class="callout info">
+          <div class="callout-label">How domains connect to hosting</div>
+          <p>
+            Your host gives you two nameserver addresses (ns1.hostinger.com).
+            Paste these into your domain registrar settings — this points the
+            domain to your hosting server's IP.
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 11: Frontend vs Backend (deep dive from part 2) -->
+      <div class="section" id="s11">
+        <div class="section-header">
+          <div class="section-num num-purple">11</div>
+          <div class="section-title">
+            Frontend vs backend — the full picture
+          </div>
+        </div>
+        <p class="body">
+          Every file you upload belongs to one of two worlds. Understanding this
+          split is the single most important mental model for web development.
+        </p>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 1rem 0;
+          "
+        >
+          <div
+            style="
+              background: var(--color-background-primary);
+              border: 0.5px solid var(--color-border-tertiary);
+              border-radius: var(--border-radius-lg);
+              overflow: hidden;
+            "
+          >
+            <div style="background: #e6f1fb; padding: 0.75rem 1rem">
+              <div style="font-size: 11px; font-weight: 500; color: #185fa5">
+                Frontend
+              </div>
+              <div style="font-size: 14px; font-weight: 500">Client-side</div>
+            </div>
+            <div style="padding: 0.875rem 1rem">
+              <div style="font-size: 12px; margin-bottom: 0.75rem">
+                Files are <strong>sent to the user's browser</strong> to be
+                executed.
+              </div>
+              <div>
+                <div
+                  class="badge badge-blue"
+                  style="margin-bottom: 4px; display: inline-block"
+                >
+                  HTML — skeleton
+                </div>
+                <div class="badge badge-teal">CSS — styling</div>
+                <div class="badge badge-amber">JS — behaviour</div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--color-background-primary);
+              border: 0.5px solid var(--color-border-tertiary);
+              border-radius: var(--border-radius-lg);
+              overflow: hidden;
+            "
+          >
+            <div style="background: #eeedfe; padding: 0.75rem 1rem">
+              <div style="font-size: 11px; font-weight: 500; color: #534ab7">
+                Backend
+              </div>
+              <div style="font-size: 14px; font-weight: 500">Server-side</div>
+            </div>
+            <div style="padding: 0.875rem 1rem">
+              <div style="font-size: 12px; margin-bottom: 0.75rem">
+                Files <strong>never leave the server</strong>. They run there,
+                process data, and send only the result.
+              </div>
+              <div>
+                <div class="badge badge-purple">Python/Node.js/PHP</div>
+                <div class="badge badge-red">Databases</div>
+                <div class="badge badge-gray">APIs & logic</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout info">
+          <div class="callout-label">Restaurant analogy</div>
+          <p>
+            The frontend is the dining room (menu, lighting, waiters). The
+            backend is the kitchen — hidden, where the actual work happens.
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Frontend handles</th>
+                <th>Backend handles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Type password</td>
+                <td>Shows input field, hides characters</td>
+                <td>Nothing yet</td>
+              </tr>
+              <tr>
+                <td>Press "Log in"</td>
+                <td>Shows loading spinner</td>
+                <td>
+                  Checks password against database, returns success/failure
+                </td>
+              </tr>
+              <tr>
+                <td>Login succeeds</td>
+                <td>Redirects to feed, renders posts</td>
+                <td>Generates session token, queries feed content</td>
+              </tr>
+              <tr>
+                <td>You scroll</td>
+                <td>Requests more posts</td>
+                <td>Queries database for next batch, returns them</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SECTION 12: The full journey step-by-step (stepper) -->
+      <div class="section" id="s12">
+        <div class="section-header">
+          <div class="section-num num-teal">12</div>
+          <div class="section-title">The full journey — step by step</div>
+        </div>
+        <p class="body">
+          Every time you type a URL and press Enter, a precise sequence of
+          events unfolds in milliseconds.
+        </p>
+        <div class="stepper">
+          <div class="stepper-nav">
+            <div class="stepper-dots" id="sdots"></div>
+            <div class="stepper-btns">
+              <button onclick="stepNav(-1)" style="font-size: 12px">
+                ← Prev</button
+              ><button onclick="stepNav(1)" style="font-size: 12px">
+                Next →
+              </button>
+            </div>
+          </div>
+          <div class="stepper-panel" id="spanel"></div>
+        </div>
+      </div>
+
+      <!-- SECTION 13: CDNs -->
+      <div class="section" id="s13">
+        <div class="section-header">
+          <div class="section-num num-amber">13</div>
+          <div class="section-title">CDNs — content delivery networks</div>
+        </div>
+        <p class="body">
+          A CDN places copies of your content at dozens of locations worldwide,
+          dramatically reducing latency.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot"><i class="ti ti-world"></i></div>
+            <div class="step-content">
+              <div class="step-title">Origin server</div>
+              <div class="step-desc">
+                Your actual hosting server — the single source of truth.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot"><i class="ti ti-map-pin"></i></div>
+            <div class="step-content">
+              <div class="step-title">Edge nodes (PoPs)</div>
+              <div class="step-desc">
+                Copies of static content (images, CSS, videos) cached worldwide
+                — Johannesburg, London, Singapore.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot"><i class="ti ti-bolt"></i></div>
+            <div class="step-content">
+              <div class="step-title">Result — lower latency</div>
+              <div class="step-desc">
+                A user in SA might wait 5ms instead of 200ms from California.
+                Providers: Cloudflare, AWS CloudFront, Akamai.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout info">
+          <div class="callout-label">What CDNs cache</div>
+          <p>
+            Static assets — images, CSS, JS files. They don’t cache dynamic
+            content (personalized feeds, account data).
+          </p>
+        </div>
+      </div>
+
+      <!-- SECTION 14: APIs -->
+      <div class="section" id="s14">
+        <div class="section-header">
+          <div class="section-num num-blue">14</div>
+          <div class="section-title">
+            APIs — how services talk to each other
+          </div>
+        </div>
+        <p class="body">
+          An API defines rules for how two pieces of software communicate. Your
+          weather app asks a weather API — it didn't build its own satellites.
+        </p>
+        <div class="callout info">
+          <div class="callout-label">Analogy</div>
+          <p>
+            A restaurant menu is an API. It defines exactly what you can order
+            and what you'll get back. You don't need to know how the kitchen
+            works.
+          </p>
+        </div>
+        <div class="card-grid">
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-blue">REST</span>
+            </div>
+            <div class="mini-card-desc">
+              Uses HTTP methods, returns JSON. Stateless.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-purple">GraphQL</span>
+            </div>
+            <div class="mini-card-desc">
+              Specify exactly which fields you need. Avoids over-fetching.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-teal">WebSockets</span>
+            </div>
+            <div class="mini-card-desc">
+              Persistent two-way connection. Live chat, stock tickers.
+            </div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-card-title">
+              <span class="badge badge-amber">Webhooks</span>
+            </div>
+            <div class="mini-card-desc">
+              "Don't call us, we'll call you." Notifies your URL instantly when
+              an event happens.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MASTER GLOSSARY -->
+      <div class="big-summary" id="glossary">
+        <div class="big-summary-header">
+          <h3>Quick-reference glossary</h3>
+          <p>Every key term from this guide in one place</p>
+        </div>
+        <div class="concept-grid">
+          <div class="concept">
+            <div class="concept-term">IP address</div>
+            <div class="concept-def">
+              Unique numerical label for every device on a network
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">DNS</div>
+            <div class="concept-def">
+              Translates domain names to IP addresses. Phone book for the
+              internet.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">Packet</div>
+            <div class="concept-def">
+              Small chunk of data with a destination address.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">Router</div>
+            <div class="concept-def">
+              Forwards packets toward their destination.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">TCP/IP</div>
+            <div class="concept-def">
+              Foundational rules: TCP ensures delivery; IP handles addressing.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">HTTP / HTTPS</div>
+            <div class="concept-def">
+              Web protocol. HTTPS adds encryption via TLS.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">TLS handshake</div>
+            <div class="concept-def">
+              Negotiation that establishes a secure encrypted connection.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">WPA2/WPA3</div>
+            <div class="concept-def">
+              Wi-Fi encryption standards. Scrambles radio waves.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">Cookies</div>
+            <div class="concept-def">
+              Small ID tokens that let stateless HTTP "remember" you.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">TLD / SLD</div>
+            <div class="concept-def">
+              Top-level (.com) and second-level (google) domain parts.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">TTL</div>
+            <div class="concept-def">
+              Time To Live — expiry countdown on a cached DNS record.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">CDN</div>
+            <div class="concept-def">
+              Content Delivery Network — caches static files at global edge
+              locations.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">API</div>
+            <div class="concept-def">
+              Rules for software communication. REST, GraphQL, WebSockets.
+            </div>
+          </div>
+          <div class="concept">
+            <div class="concept-term">Fiber-optic cable</div>
+            <div class="concept-def">
+              Subsea cables that transmit data as light pulses — internet's
+              backbone.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
     </div>
-  </div>
 
-  <!-- ========== SECTION 1 ========== -->
-  <div class="section" id="s1">
-    <div class="section-header"><div class="section-num num-blue">01</div><div class="section-title">Physical infrastructure</div></div>
-    <p class="body">The biggest misconception about the internet is that it's an invisible "cloud." In reality, the internet is the largest physical machine ever built — millions of miles of cables and hundreds of millions of computers.</p>
-    <div class="card-grid">
-      <div class="mini-card"><div class="mini-card-icon"><i class="ti ti-device-laptop" aria-hidden="true"></i></div><div class="mini-card-title">Clients</div><div class="mini-card-desc">Your devices — phones, laptops, TVs. They request information.</div></div>
-      <div class="mini-card"><div class="mini-card-icon"><i class="ti ti-server" aria-hidden="true"></i></div><div class="mini-card-title">Servers</div><div class="mini-card-desc">Powerful computers storing websites, apps, and data. They serve information.</div></div>
-      <div class="mini-card"><div class="mini-card-icon"><i class="ti ti-building-warehouse" aria-hidden="true"></i></div><div class="mini-card-title">Data centers</div><div class="mini-card-desc">Massive warehouses of servers. This is where the "cloud" physically lives.</div></div>
-      <div class="mini-card"><div class="mini-card-icon"><i class="ti ti-wave-sine" aria-hidden="true"></i></div><div class="mini-card-title">Backbone cables</div><div class="mini-card-desc">Subsea fiber-optic cables transmit data as light pulses across oceans.</div></div>
-    </div>
-    <div class="callout highlight"><div class="callout-label">Key insight</div><p>Fiber-optic cables use <strong>light</strong> to transmit data. A single cable can carry hundreds of terabits per second — enough to stream millions of 4K movies simultaneously.</p></div>
-  </div>
+    <script>
+      // script.js – interactive features for "How the Internet Works" guide
 
-  <!-- SECTION 2 -->
-  <div class="section" id="s2"><div class="section-header"><div class="section-num num-teal">02</div><div class="section-title">IP addresses &amp; DNS</div></div>
-    <p class="body">If the internet is a giant postal system, every device needs an address so data knows where to go.</p>
-    <div class="card-grid"><div class="mini-card"><div class="mini-card-icon"><i class="ti ti-map-pin"></i></div><div class="mini-card-title">IP address</div><div class="mini-card-desc">A unique number assigned to every device (e.g., 192.168.1.45).</div></div>
-    <div class="mini-card"><div class="mini-card-icon"><i class="ti ti-address-book"></i></div><div class="mini-card-title">DNS</div><div class="mini-card-desc">Translates human-readable names (youtube.com) into IP addresses computers understand.</div></div></div>
-    <div class="callout info"><div class="callout-label">Analogy</div><p>DNS is like the Contacts app on your phone. You tap "Mom" and your phone dials her actual number — you never need to remember it yourself.</p></div>
-  </div>
+      // -------------------------------
+      // 1. Packet reassembly demo (Section 3)
+      // -------------------------------
+      let animating = false;
 
-  <!-- SECTION 3: Packets + interactive demo -->
-  <div class="section" id="s3"><div class="section-header"><div class="section-num num-blue">03</div><div class="section-title">Packets &amp; routing</div></div>
-    <p class="body">When you request a 4K movie, the server doesn't send one giant file — that would clog every network.</p>
-    <div class="steps"><div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">Data is split into packets</div><div class="step-desc">Every file, video, or webpage is broken into small, equal-sized chunks called packets. Each gets a "shipping label" with the destination IP address and a sequence number.</div></div></div>
-    <div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">Routers direct traffic</div><div class="step-desc">Specialized computers at network intersections read each packet's label and send it down the fastest available path.</div></div></div>
-    <div class="step"><div class="step-dot">3</div><div class="step-content"><div class="step-title">Packets are reassembled</div><div class="step-desc">Your device uses the sequence numbers to reassemble the packets in the correct order.</div></div></div></div>
-    <div class="callout info"><div class="callout-label">Analogy</div><p>Mailing a built Lego castle: you disassemble it, mail each brick in a numbered envelope, and the recipient rebuilds it.</p></div>
-    <div class="interactive-demo"><div class="demo-bar"><span class="dot dot-green"></span><span>Packet reassembly — interactive demo</span></div><div class="demo-content"><p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:.75rem">A 4K movie frame, split into 12 packets traveling different routes:</p><div class="packet-demo" id="pkts"><div class="packet">#01 VIDEO</div><div class="packet">#02 VIDEO</div><div class="packet">#03 VIDEO</div><div class="packet">#04 VIDEO</div><div class="packet">#05 VIDEO</div><div class="packet">#06 VIDEO</div><div class="packet">#07 VIDEO</div><div class="packet">#08 VIDEO</div><div class="packet">#09 VIDEO</div><div class="packet">#10 VIDEO</div><div class="packet">#11 VIDEO</div><div class="packet">#12 VIDEO</div></div><button onclick="animatePackets()" style="font-size:13px;margin-top:.5rem">Simulate delivery →</button><p id="pkt-status" style="font-size:12px;color:var(--color-text-tertiary);margin-top:.5rem;min-height:18px"></p></div></div>
-  </div>
+      function animatePackets() {
+        if (animating) return;
+        animating = true;
 
-  <!-- SECTION 4: Protocols -->
-  <div class="section" id="s4"><div class="section-header"><div class="section-num num-teal">04</div><div class="section-title">Protocols: the rules of communication</div></div>
-    <p class="body">For a Mac to talk to a Windows PC, they all need to speak the same language. These standardized languages are called protocols.</p>
-    <div class="table-wrap"><table><thead><tr><th>Protocol</th><th>Full name</th><th>What it does</th></tr></thead><tbody><tr><td><span class="badge badge-blue">TCP/IP</span></td><td>Transmission Control / Internet Protocol</td><td>TCP guarantees all packets arrive and are ordered correctly. IP handles addressing and routing.</td></tr><tr><td><span class="badge badge-teal">HTTP</span></td><td>Hypertext Transfer Protocol</td><td>The language for the World Wide Web — requesting and delivering web pages.</td></tr><tr><td><span class="badge badge-green">HTTPS</span></td><td>HTTP Secure</td><td>HTTP + encryption. Data between you and the server is scrambled. Intercepted packets look like gibberish.</td></tr><tr><td><span class="badge badge-amber">UDP</span></td><td>User Datagram Protocol</td><td>Faster than TCP but no delivery guarantee. Used for video calls, gaming, DNS queries.</td></tr></tbody></table></div>
-    <div class="callout highlight"><div class="callout-label">The journey of a click</div><p>You type <strong>netflix.com</strong> → DNS resolves the IP → your browser breaks the request into packets → packets travel through your ISP and subsea cables → Netflix's server sends back the page as millions of new packets → your browser reassembles and renders them.</p></div>
-  </div>
+        const pkts = document.querySelectorAll("#pkts .packet");
+        const statusElem = document.getElementById("pkt-status");
 
-  <!-- SECTION 5: Wi-Fi & last mile -->
-  <div class="section" id="s5"><div class="section-header"><div class="section-num num-amber">05</div><div class="section-title">Wi-Fi &amp; the last mile</div></div>
-    <p class="body">Data travels mostly through physical cables and light pulses until it reaches your home. Wi-Fi covers the final invisible gap between the wall and your device.</p>
-    <div class="steps"><div class="step"><div class="step-dot"><i class="ti ti-device-mobile"></i></div><div class="step-content"><div class="step-title">Your phone converts data to radio waves</div><div class="step-desc">Your device has a tiny antenna that translates digital data (1s and 0s) into radio wave frequencies — 2.4 GHz or 5 GHz.</div></div></div>
-    <div class="step"><div class="step-dot"><i class="ti ti-router"></i></div><div class="step-content"><div class="step-title">The router catches and translates</div><div class="step-desc">Your Wi-Fi router receives the radio waves and translates them back into digital data.</div></div></div>
-    <div class="step"><div class="step-dot"><i class="ti ti-plug"></i></div><div class="step-content"><div class="step-title">The modem sends it into the cable</div><div class="step-desc">The modem pushes that data into the physical cable (fiber, coaxial, or copper), sending it toward your ISP.</div></div></div></div>
-    <div class="callout info"><div class="callout-label">Analogy</div><p>You're on an island and need to send a letter to the mainland. You use a flashlight to blink Morse code to a lighthouse keeper (Wi-Fi). The keeper writes it down and drops it into the postal system (physical cables).</p></div>
-  </div>
+        // Reset all packets
+        pkts.forEach((p) => {
+          p.classList.remove("arrived");
+          p.style.opacity = "0.3";
+        });
+        statusElem.textContent =
+          "🚀 Packets in transit via different routes...";
 
-  <!-- SECTION 6: Security & encryption (TLS handshake deep dive) -->
-  <div class="section" id="s6"><div class="section-header"><div class="section-num num-coral">06</div><div class="section-title">Security, threats &amp; encryption</div></div>
-    <p class="body">Because Wi-Fi uses radio waves, it broadcasts outward in every direction — anyone in range can technically "hear" your data.</p>
-    <div class="callout danger"><div class="callout-label">Threat: Packet sniffing</div><p>Hackers use specialized software to capture radio wave packets floating through the air.</p></div>
-    <div class="callout danger"><div class="callout-label">Threat: Evil twin / MitM</div><p>A hacker broadcasts a fake Wi-Fi network; every packet passes through their machine first.</p></div>
-    <p class="body" style="margin-top:1rem">Modern encryption makes intercepted data useless, even when it's successfully captured.</p>
-    <div class="table-wrap"><table><thead><tr><th>Shield</th><th>How it works</th></tr></thead><tbody><tr><td><span class="badge badge-green">WPA2 / WPA3</span></td><td>When you enter a Wi-Fi password, you enable an encryption key that scrambles your radio waves before they're broadcast.</td></tr><tr><td><span class="badge badge-green">HTTPS</span></td><td>Even on password-free public Wi-Fi, HTTPS encrypts your passwords and credit card numbers before they're put into packets. The lock icon confirms this.</td></tr></tbody></table></div>
-    <div class="section" style="margin-bottom:0;margin-top:1.5rem"><p class="body" style="font-weight:500;margin-bottom:.5rem">How HTTPS scrambles your data: the TLS handshake</p>
-    <div class="steps"><div class="step"><div class="step-dot">A</div><div class="step-content"><div class="step-title">Asymmetric encryption — the padlock system</div><div class="step-desc">The server gives out a <strong>public key</strong> (can only lock data) to anyone who asks, and keeps a <strong>private key</strong> (can only unlock) secret forever.</div></div></div>
-    <div class="step"><div class="step-dot">B</div><div class="step-content"><div class="step-title">Symmetric encryption — the secret handshake</div><div class="step-desc">Once a secure channel exists, both sides switch to a single shared key — much faster, needed for streaming 4K video.</div></div></div></div>
-    <div class="table-wrap"><table><thead><tr><th>Step</th><th>What happens</th><th>Who</th></tr></thead><tbody><tr><td>1. Hello</td><td>"I want to connect securely."</td><td>Browser</td></tr><tr><td>2. Padlock</td><td>"Here's my public key."</td><td>Server</td></tr><tr><td>3. Secret</td><td>Generates a temporary session key.</td><td>Browser</td></tr><tr><td>4. Lock</td><td>Seals session key inside a box locked with the public key.</td><td>Browser</td></tr><tr><td>5. Delivery</td><td>Sends the locked box (useless without private key).</td><td>Browser</td></tr><tr><td>6. Unlock</td><td>Opens the box with private key, reveals session key.</td><td>Server</td></tr><tr><td>7. Secure</td><td>Both sides now share the fast session key. Connection is live.</td><td>Both</td></tr></tbody></table></div></div>
-  </div>
+        // Simulate out-of-order arrival (sequence numbers 1..12 shuffled)
+        // This order mimics real internet routing where packets take different paths
+        const arrivalOrder = [0, 4, 7, 2, 9, 1, 5, 8, 3, 6, 10, 11]; // indices of packets 0-based
 
-  <!-- SECTION 7: HTTP in depth -->
-  <div class="section" id="s7"><div class="section-header"><div class="section-num num-blue">07</div><div class="section-title">HTTP in depth</div><span class="section-subtitle">The request-response cycle</span></div>
-    <p class="body">HTTP is the language browsers and servers use. Every interaction is a strict ask-and-receive: the browser sends a request, the server sends a response.</p>
-    <div class="callout info"><div class="callout-label">Analogy</div><p>Ordering at a restaurant. You give the waiter your order (request), and the waiter brings food from the kitchen (response).</p></div>
-    <p class="body" style="font-weight:500;margin-top:1rem">HTTP methods — the verbs of the internet</p>
-    <div class="card-grid"><div class="mini-card"><div class="mini-card-title"><span class="badge badge-blue">GET</span></div><div class="mini-card-desc">Fetches data. Visible in URL, like writing on a postcard.</div></div><div class="mini-card"><div class="mini-card-title"><span class="badge badge-teal">POST</span></div><div class="mini-card-desc">Submits data (passwords, forms) hidden in request body — like a sealed envelope.</div></div><div class="mini-card"><div class="mini-card-title"><span class="badge badge-amber">PUT/PATCH</span></div><div class="mini-card-desc">Updates existing data. PUT replaces, PATCH updates partially.</div></div><div class="mini-card"><div class="mini-card-title"><span class="badge badge-red">DELETE</span></div><div class="mini-card-desc">Removes a resource from the server.</div></div></div>
-    <p class="body" style="font-weight:500">Statelessness & cookies</p><p class="body">HTTP is "stateless" — the server retains zero memory of previous requests. This is why <strong>cookies</strong> exist: when you log in, the server gives your browser a tiny digital ID card so it recognizes you.</p>
-    <p class="body" style="font-weight:500">Status codes — the server's response signal</p>
-    <div class="table-wrap"><table><thead><tr><th>Range</th><th>Meaning</th><th>Examples</th></tr></thead><tbody><tr><td><span class="badge badge-green">2xx</span></td><td>Success</td><td>200 OK</td></tr><tr><td><span class="badge badge-blue">3xx</span></td><td>Redirection</td><td>301 Moved Permanently</td></tr><tr><td><span class="badge badge-amber">4xx</span></td><td>Client error</td><td>404 Not Found, 403 Forbidden</td></tr><tr><td><span class="badge badge-red">5xx</span></td><td>Server error</td><td>500 Internal Server Error</td></tr></tbody></table></div>
-    <div class="code-label">Raw POST request (login form)</div><div class="code-block">POST /login.html HTTP/1.1\nHost: www.example.com\nUser-Agent: Mozilla/5.0\nContent-Type: application/x-www-form-urlencoded\n\nusername=joesmith&password=secret123</div>
-    <div class="code-label">Raw HTTP response</div><div class="code-block">HTTP/1.1 200 OK\nDate: ...\nContent-Type: text/html\n\n&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Welcome back!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</div>
-  </div>
+        let step = 0;
+        const interval = setInterval(() => {
+          if (step >= arrivalOrder.length) {
+            clearInterval(interval);
+            statusElem.textContent =
+              "✅ All 12 packets arrived — browser reassembles them in correct sequence order.";
+            animating = false;
+            return;
+          }
+          const idx = arrivalOrder[step];
+          pkts[idx].classList.add("arrived");
+          pkts[idx].style.opacity = "1";
+          step++;
+        }, 220);
+      }
 
-  <!-- SECTION 8: Domain names -->
-  <div class="section" id="s8"><div class="section-header"><div class="section-num num-purple">08</div><div class="section-title">Domain names</div></div>
-    <p class="body">Domain names are human-friendly addresses that hide numerical IP addresses. Computers read them <strong>right to left</strong>.</p>
-    <div class="interactive-demo"><div class="demo-bar"><span class="dot dot-green"></span><span>Domain anatomy: blog.google.com</span></div><div class="demo-content"><div style="display:flex;gap:0;flex-wrap:wrap"><div style="padding:.5rem .75rem;background:#EEEDFE;border-radius:4px 0 0 4px;">blog</div><div style="padding:.5rem 4px;color:var(--color-text-tertiary)">.</div><div style="padding:.5rem .75rem;background:#E1F5EE;">google</div><div style="padding:.5rem 4px;color:var(--color-text-tertiary)">.</div><div style="padding:.5rem .75rem;background:#E6F1FB;border-radius:0 4px 4px 0;">com</div></div><div style="display:flex;gap:10px;margin-top:.75rem;flex-wrap:wrap"><div style="flex:1"><div class="badge badge-teal">Subdomain</div><div style="font-size:12px;">blog — organizes sections</div></div><div style="flex:1"><div class="badge badge-green">Second-level domain</div><div style="font-size:12px;">google — brand name</div></div><div style="flex:1"><div class="badge badge-blue">Top-level domain</div><div style="font-size:12px;">.com (commercial)</div></div></div></div></div>
-    <div class="steps"><div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">DNS Recursor (ISP's librarian)</div><div class="step-desc">Your computer asks your ISP's recursor to fetch the answer.</div></div></div><div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">Root nameserver</div><div class="step-desc">"I don't know, but go ask the .com servers."</div></div></div><div class="step"><div class="step-dot">3</div><div class="step-content"><div class="step-title">TLD nameserver</div><div class="step-desc">Knows who manages google.com specifically. "Go ask Google's own nameservers."</div></div></div><div class="step"><div class="step-dot">4</div><div class="step-content"><div class="step-title">Authoritative nameserver</div><div class="step-desc">Returns the actual IP address: 142.250.190.46.</div></div></div></div>
-    <div class="table-wrap"><table><thead><tr><th>Role</th><th>Who</th><th>What they control</th></tr></thead><tbody><tr><td><span class="badge badge-blue">Registry</span></td><td>Verisign (.com), ICANN</td><td>Owns and manages the entire TLD.</td></tr><tr><td><span class="badge badge-teal">Registrar</span></td><td>GoDaddy, Namecheap</td><td>Certified to sell domain access.</td></tr><tr><td><span class="badge badge-gray">You</span></td><td>Leaseholder</td><td>You lease the right to use the domain for 1+ years.</td></tr></tbody></table></div>
-  </div>
+      // Expose to global scope so inline onclick works
+      window.animatePackets = animatePackets;
 
-  <!-- SECTION 9: DNS caching -->
-  <div class="section" id="s9"><div class="section-header"><div class="section-num num-teal">09</div><div class="section-title">DNS caching &amp; TTL</div></div>
-    <p class="body">Caching is a digital cheat-sheet: once your computer learns an IP, it writes it down locally and skips the journey next time.</p>
-    <div class="table-wrap"><table><thead><tr><th>Layer</th><th>Where</th><th>Speed</th></tr></thead><tbody><tr><td><span class="badge badge-blue">1</span></td><td>Browser cache</td><td>~0ms</td></tr><tr><td><span class="badge badge-teal">2</span></td><td>OS cache</td><td>&lt;1ms</td></tr><tr><td><span class="badge badge-amber">3</span></td><td>Home router</td><td>~1ms</td></tr><tr><td><span class="badge badge-green">4</span></td><td>ISP Recursive Resolver</td><td>~10ms</td></tr></tbody></table></div>
-    <div class="callout info"><div class="callout-label">TTL — the expiry date</div><p>Every cached record has a Time to Live (TTL) measured in seconds. When the timer hits zero, the cache deletes the record.</p></div>
-  </div>
+      // -------------------------------
+      // 2. Full journey stepper (Section 12)
+      // -------------------------------
+      const journeySteps = [
+        {
+          title: "You type netflix.com and press Enter",
+          desc: "Your browser checks its own DNS cache first. If it has a record for netflix.com and it hasn't expired (TTL still valid), it skips straight to step 4. If not, the DNS lookup begins.",
+        },
+        {
+          title: "DNS resolution — the relay race",
+          desc: "Your OS cache → home router cache → ISP resolver cache. If all miss, the ISP resolver queries Root nameserver → .com TLD nameserver → Netflix's Authoritative nameserver, which returns the IP address (e.g. 52.94.237.74).",
+        },
+        {
+          title: "TCP connection is established",
+          desc: "Your browser initiates a three-way handshake with the Netflix server: SYN → SYN-ACK → ACK. This confirms the server is reachable before any real data is sent. With HTTP/3 (QUIC), this handshake is faster.",
+        },
+        {
+          title: "TLS handshake — securing the connection",
+          desc: "Your browser and the server exchange keys in milliseconds. The server sends its public key certificate. Your browser generates a session key, encrypts it with the server's public key, sends it. The server unlocks it with its private key. Both sides now share a symmetric session key.",
+        },
+        {
+          title: "HTTP request is sent",
+          desc: "Your browser sends an HTTPS GET request for the Netflix homepage. The request travels as packets through your Wi-Fi → modem → ISP → internet backbone → Netflix's load balancer → their servers.",
+        },
+        {
+          title: "Server processes the request",
+          desc: "Netflix's backend authenticates you (via your session cookie), queries databases for your account and personalised recommendations, and assembles the HTML response.",
+        },
+        {
+          title: "Response travels back and is rendered",
+          desc: "The HTML, CSS, and JS arrive as thousands of packets. Your browser reassembles them, parses the HTML, fetches additional assets (images, fonts, JS), runs JavaScript, and paints the final page on your screen. Total time: typically under 1 second.",
+        },
+      ];
 
-  <!-- SECTION 10: Web hosting -->
-  <div class="section" id="s10"><div class="section-header"><div class="section-num num-purple">10</div><div class="section-title">Web hosting</div></div>
-    <p class="body">If the domain is your website's phone number, web hosting is the physical house where the website lives.</p>
-    <div class="hosting-grid"><div class="hosting-card"><div class="hosting-card-label" style="color:#185FA5">Shared</div><h4>Apartment building</h4><p>Hundreds of sites share one server. Cheapest, but traffic spikes can slow neighbours.</p></div><div class="hosting-card"><div class="hosting-card-label" style="color:#0F6E56">VPS</div><h4>Private condo</h4><p>Physically shared but digitally partitioned with guaranteed resources.</p></div><div class="hosting-card"><div class="hosting-card-label" style="color:#854F0B">Dedicated</div><h4>Private mansion</h4><p>You rent an entire physical server. Maximum control.</p></div><div class="hosting-card"><div class="hosting-card-label" style="color:#534AB7">Cloud</div><h4>Shape-shifting hotel</h4><p>Scales automatically; pay only for what you use (AWS, GCP, Azure).</p></div></div>
-    <div class="callout info"><div class="callout-label">How domains connect to hosting</div><p>Your host gives you two nameserver addresses (ns1.hostinger.com). Paste these into your domain registrar settings — this points the domain to your hosting server's IP.</p></div>
-  </div>
+      let currentStepIndex = 0;
 
-  <!-- SECTION 11: Frontend vs Backend (deep dive from part 2) -->
-  <div class="section" id="s11"><div class="section-header"><div class="section-num num-purple">11</div><div class="section-title">Frontend vs backend — the full picture</div></div>
-    <p class="body">Every file you upload belongs to one of two worlds. Understanding this split is the single most important mental model for web development.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0"><div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden"><div style="background:#e6f1fb;padding:.75rem 1rem"><div style="font-size:11px;font-weight:500;color:#185fa5">Frontend</div><div style="font-size:14px;font-weight:500">Client-side</div></div><div style="padding:.875rem 1rem"><div style="font-size:12px;margin-bottom:.75rem">Files are <strong>sent to the user's browser</strong> to be executed.</div><div><div class="badge badge-blue" style="margin-bottom:4px;display:inline-block">HTML — skeleton</div> <div class="badge badge-teal">CSS — styling</div> <div class="badge badge-amber">JS — behaviour</div></div></div></div><div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden"><div style="background:#eeedfe;padding:.75rem 1rem"><div style="font-size:11px;font-weight:500;color:#534ab7">Backend</div><div style="font-size:14px;font-weight:500">Server-side</div></div><div style="padding:.875rem 1rem"><div style="font-size:12px;margin-bottom:.75rem">Files <strong>never leave the server</strong>. They run there, process data, and send only the result.</div><div><div class="badge badge-purple">Python/Node.js/PHP</div> <div class="badge badge-red">Databases</div> <div class="badge badge-gray">APIs & logic</div></div></div></div></div>
-    <div class="callout info"><div class="callout-label">Restaurant analogy</div><p>The frontend is the dining room (menu, lighting, waiters). The backend is the kitchen — hidden, where the actual work happens.</p></div>
-    <div class="table-wrap"><table><thead><tr><th>Action</th><th>Frontend handles</th><th>Backend handles</th></tr></thead><tbody><tr><td>Type password</td><td>Shows input field, hides characters</td><td>Nothing yet</td></tr><tr><td>Press "Log in"</td><td>Shows loading spinner</td><td>Checks password against database, returns success/failure</td></tr><tr><td>Login succeeds</td><td>Redirects to feed, renders posts</td><td>Generates session token, queries feed content</td></tr><tr><td>You scroll</td><td>Requests more posts</td><td>Queries database for next batch, returns them</td></tr></tbody></table></div>
-  </div>
+      function renderStepper() {
+        const panel = document.getElementById("spanel");
+        const dotsContainer = document.getElementById("sdots");
+        if (!panel || !dotsContainer) return;
 
-  <!-- SECTION 12: The full journey step-by-step (stepper) -->
-  <div class="section" id="s12"><div class="section-header"><div class="section-num num-teal">12</div><div class="section-title">The full journey — step by step</div></div>
-    <p class="body">Every time you type a URL and press Enter, a precise sequence of events unfolds in milliseconds.</p>
-    <div class="stepper"><div class="stepper-nav"><div class="stepper-dots" id="sdots"></div><div class="stepper-btns"><button onclick="stepNav(-1)" style="font-size:12px">← Prev</button><button onclick="stepNav(1)" style="font-size:12px">Next →</button></div></div><div class="stepper-panel" id="spanel"></div></div>
-  </div>
+        // Render content
+        const step = journeySteps[currentStepIndex];
+        panel.innerHTML = `
+      <div class="stepper-title">${currentStepIndex + 1}. ${step.title}</div>
+      <div class="stepper-desc">${step.desc}</div>
+    `;
 
-  <!-- SECTION 13: CDNs -->
-  <div class="section" id="s13"><div class="section-header"><div class="section-num num-amber">13</div><div class="section-title">CDNs — content delivery networks</div></div>
-    <p class="body">A CDN places copies of your content at dozens of locations worldwide, dramatically reducing latency.</p>
-    <div class="steps"><div class="step"><div class="step-dot"><i class="ti ti-world"></i></div><div class="step-content"><div class="step-title">Origin server</div><div class="step-desc">Your actual hosting server — the single source of truth.</div></div></div><div class="step"><div class="step-dot"><i class="ti ti-map-pin"></i></div><div class="step-content"><div class="step-title">Edge nodes (PoPs)</div><div class="step-desc">Copies of static content (images, CSS, videos) cached worldwide — Johannesburg, London, Singapore.</div></div></div><div class="step"><div class="step-dot"><i class="ti ti-bolt"></i></div><div class="step-content"><div class="step-title">Result — lower latency</div><div class="step-desc">A user in SA might wait 5ms instead of 200ms from California. Providers: Cloudflare, AWS CloudFront, Akamai.</div></div></div></div>
-    <div class="callout info"><div class="callout-label">What CDNs cache</div><p>Static assets — images, CSS, JS files. They don’t cache dynamic content (personalized feeds, account data).</p></div>
-  </div>
+        // Render dots
+        dotsContainer.innerHTML = journeySteps
+          .map(
+            (_, i) =>
+              `<div class="sdot ${i === currentStepIndex ? "active" : ""}"></div>`,
+          )
+          .join("");
+      }
 
-  <!-- SECTION 14: APIs -->
-  <div class="section" id="s14"><div class="section-header"><div class="section-num num-blue">14</div><div class="section-title">APIs — how services talk to each other</div></div>
-    <p class="body">An API defines rules for how two pieces of software communicate. Your weather app asks a weather API — it didn't build its own satellites.</p>
-    <div class="callout info"><div class="callout-label">Analogy</div><p>A restaurant menu is an API. It defines exactly what you can order and what you'll get back. You don't need to know how the kitchen works.</p></div>
-    <div class="card-grid"><div class="mini-card"><div class="mini-card-title"><span class="badge badge-blue">REST</span></div><div class="mini-card-desc">Uses HTTP methods, returns JSON. Stateless.</div></div><div class="mini-card"><div class="mini-card-title"><span class="badge badge-purple">GraphQL</span></div><div class="mini-card-desc">Specify exactly which fields you need. Avoids over-fetching.</div></div><div class="mini-card"><div class="mini-card-title"><span class="badge badge-teal">WebSockets</span></div><div class="mini-card-desc">Persistent two-way connection. Live chat, stock tickers.</div></div><div class="mini-card"><div class="mini-card-title"><span class="badge badge-amber">Webhooks</span></div><div class="mini-card-desc">"Don't call us, we'll call you." Notifies your URL instantly when an event happens.</div></div></div>
-  </div>
+      function stepNav(direction) {
+        currentStepIndex =
+          (currentStepIndex + direction + journeySteps.length) %
+          journeySteps.length;
+        renderStepper();
+      }
 
-  <!-- MASTER GLOSSARY -->
-  <div class="big-summary" id="glossary"><div class="big-summary-header"><h3>Quick-reference glossary</h3><p>Every key term from this guide in one place</p></div><div class="concept-grid"><div class="concept"><div class="concept-term">IP address</div><div class="concept-def">Unique numerical label for every device on a network</div></div><div class="concept"><div class="concept-term">DNS</div><div class="concept-def">Translates domain names to IP addresses. Phone book for the internet.</div></div><div class="concept"><div class="concept-term">Packet</div><div class="concept-def">Small chunk of data with a destination address.</div></div><div class="concept"><div class="concept-term">Router</div><div class="concept-def">Forwards packets toward their destination.</div></div><div class="concept"><div class="concept-term">TCP/IP</div><div class="concept-def">Foundational rules: TCP ensures delivery; IP handles addressing.</div></div><div class="concept"><div class="concept-term">HTTP / HTTPS</div><div class="concept-def">Web protocol. HTTPS adds encryption via TLS.</div></div><div class="concept"><div class="concept-term">TLS handshake</div><div class="concept-def">Negotiation that establishes a secure encrypted connection.</div></div><div class="concept"><div class="concept-term">WPA2/WPA3</div><div class="concept-def">Wi-Fi encryption standards. Scrambles radio waves.</div></div><div class="concept"><div class="concept-term">Cookies</div><div class="concept-def">Small ID tokens that let stateless HTTP "remember" you.</div></div><div class="concept"><div class="concept-term">TLD / SLD</div><div class="concept-def">Top-level (.com) and second-level (google) domain parts.</div></div><div class="concept"><div class="concept-term">TTL</div><div class="concept-def">Time To Live — expiry countdown on a cached DNS record.</div></div><div class="concept"><div class="concept-term">CDN</div><div class="concept-def">Content Delivery Network — caches static files at global edge locations.</div></div><div class="concept"><div class="concept-term">API</div><div class="concept-def">Rules for software communication. REST, GraphQL, WebSockets.</div></div><div class="concept"><div class="concept-term">Fiber-optic cable</div><div class="concept-def">Subsea cables that transmit data as light pulses — internet's backbone.</div></div></div></div>
-  <div class="divider"></div>
-</div>
+      // Attach to global scope so buttons work with inline onclick
+      window.stepNav = stepNav;
 
-<script src="script.js"></script>
-</body>
+      // -------------------------------
+      // 3. Initialize stepper on page load
+      // -------------------------------
+      document.addEventListener("DOMContentLoaded", () => {
+        renderStepper();
+
+        // Optional: smooth scrolling for anchor links (already handled by inline onclick)
+        // Additional: if any dynamic CSS variables need enforcement, it's already fine.
+      });
+    </script>
+  </body>
 </html>
