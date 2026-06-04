@@ -1,9 +1,25 @@
-# How the Internet Works — A Complete Visual Guide
+# How the Internet Works
 
 *From the cables under the ocean to the lock icon in your browser — a clear, complete walkthrough of the infrastructure, protocols, and security that power the web.*
 
 > **Note**: This document contains the full text of the interactive HTML guide. For an interactive experience with a packet reassembly demo and step‑by‑step journey stepper, open the `index.html` file in a browser.
-
+ ____                          __              __      ____                
+/\  _`\                       /\ \__          /\ \    /\  _`\              
+\ \ \/\_\  _ __    __     __  \ \ ,_\    __   \_\ \   \ \ \L\ \  __  __    
+ \ \ \/_/_/\`'__\/'__`\ /'__`\ \ \ \/  /'__`\ /'_` \   \ \  _ <'/\ \/\ \   
+  \ \ \L\ \ \ \//\  __//\ \L\.\_\ \ \_/\  __//\ \L\ \   \ \ \L\ \ \ \_\ \  
+   \ \____/\ \_\\ \____\ \__/.\_\\ \__\ \____\ \___,_\   \ \____/\/`____ \ 
+    \/___/  \/_/ \/____/\/__/\/_/ \/__/\/____/\/__,_ /    \/___/  `/___/> \
+                                                                     /\___/
+                                                                     \/__/ 
+                        ___                                                
+ /'\_/`\               /\_ \    __          __                             
+/\      \   __  _   ___\//\ \  /\_\    ____/\_\                            
+\ \ \__\ \ /\ \/'\ / __`\\ \ \ \/\ \  /',__\/\ \                           
+ \ \ \_/\ \\/>  <//\ \L\ \\_\ \_\ \ \/\__, `\ \ \                          
+  \ \_\\ \_\/\_/\_\ \____//\____\\ \_\/\____/\ \_\                         
+   \/_/ \/_/\//\/_/\/___/ \/____/ \/_/\/___/  \/_/                         
+  
 ---
 
 ## Contents
@@ -414,5 +430,3 @@ An **API** (Application Programming Interface) is a set of rules that defines ho
 ---
 
 _End of guide. For an interactive experience with a packet reassembly demo and a click‑through journey stepper, please open the `index.html` file in a modern browser._
-
-```
