@@ -3,6 +3,7 @@
 *From the cables under the ocean to the lock icon in your browser — a clear, complete walkthrough of the infrastructure, protocols, and security that power the web.*
 
 > **Note**: This document contains the full text of the interactive HTML guide. For an interactive experience with a packet reassembly demo and step‑by‑step journey stepper, open the `index.html` file in a browser.
+```
  ____                          __              __      ____                
 /\  _`\                       /\ \__          /\ \    /\  _`\              
 \ \ \/\_\  _ __    __     __  \ \ ,_\    __   \_\ \   \ \ \L\ \  __  __    
@@ -19,7 +20,7 @@
  \ \ \_/\ \\/>  <//\ \L\ \\_\ \_\ \ \/\__, `\ \ \                          
   \ \_\\ \_\/\_/\_\ \____//\____\\ \_\/\____/\ \_\                         
    \/_/ \/_/\//\/_/\/___/ \/____/ \/_/\/___/  \/_/                         
-  
+```
 ---
 
 ## Contents
@@ -214,7 +215,7 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 35
 
 username=joesmith&password=secret123
-````
+```
 
 **Raw HTTP response**
 
