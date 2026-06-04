@@ -1,4 +1,3 @@
-````
 # How the Internet Works — A Complete Visual Guide
 
 *From the cables under the ocean to the lock icon in your browser — a clear, complete walkthrough of the infrastructure, protocols, and security that power the web.*
@@ -415,7 +414,5 @@ An **API** (Application Programming Interface) is a set of rules that defines ho
 ---
 
 _End of guide. For an interactive experience with a packet reassembly demo and a click‑through journey stepper, please open the `index.html` file in a modern browser._
-
-```
 
 ```
